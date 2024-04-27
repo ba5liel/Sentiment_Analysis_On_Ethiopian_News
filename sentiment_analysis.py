@@ -144,8 +144,11 @@ class SentimentPredictor:
         Returns:
             np.ndarray: Processed text data ready for model input.
         """
+        oov_index =2
+        max_features = self.sentiment_model.max_features
         tokens = text.lower().split()
-        sequence = [self.sentiment_model.word_index.get(word, 2) for word in tokens]  # 2 is typically the OOV index
+        word_index = self.sentiment_model.word_index
+        sequence = [word_index.get(word, oov_index) if word_index.get(word, max_features) < max_features else oov_index for word in tokens]  # 2 is typically the OOV index
         padded_sequence = pad_sequences([sequence], maxlen=self.sentiment_model.maxlen)
         return padded_sequence
 

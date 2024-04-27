@@ -49,11 +49,9 @@ class NewsAnalyzer:
         self.news_scraper.fetch_data()
         title = self.news_scraper.extract_title()
         content = self.news_scraper.extract_content()
-        content = """An incredible movie. One that lives with you.
-It is no wonder that the film has such a high rating, it is quite literally breathtaking."""
         # Translate content to desired language (assuming English)
-        content = title
-        content = content[:1000] if len(content) > 1000 else content
+        # content = title
+        # content = content[:1000] if len(content) > 1000 else content
         translated_text = self.translator.translate(content)
         translated_text = self.clean_text(translated_text)
         print(f"the input: {translated_text}")
@@ -93,6 +91,6 @@ if __name__ == "__main__":
         print("Model saved to", model_path)
 
     # Analyse a news article and predict its label
-    news_analyzer = NewsAnalyzer("https://www.ena.et/web/amh/w/amh_4350218", sentiment_model)
+    news_analyzer = NewsAnalyzer("https://www.ena.et/web/amh/w/amh_4349115", sentiment_model)
     predicted_label = news_analyzer.analyze_news()
     print("Predicted label:", predicted_label)
